@@ -1,16 +1,29 @@
-from random import uniform
 
-def pi(n):
-    c = 0
-    t = 0
-    for _ in range(n):
-        x = uniform(0,1)
-        y = uniform(0,1)
-        dist = x**2 + y**2
-        if dist <=1:
-            c+=1
-        t+=1
-    return 4*(c/t)
+m = [1,2,3,4]
 
-print(pi(100000000))
+def lr(m):
+    h = {x:0 for x in m}
+    l = r = 0
+
+    for i in m:
+        if h[i] == 0:
+            lc=i-1
+            rc=i+1
         
+        while lc in h:
+            h[lc] = 1
+            lc-=1
+        lc += 1 
+        
+        while rc in h:
+            h[rc] = 1
+            rc+=1
+        rc -= 1 
+    
+        if (r-l)  <= (rc-lc):
+            r = rc
+            l = lc
+    
+    return [l,r]
+        
+print(lr(m))
